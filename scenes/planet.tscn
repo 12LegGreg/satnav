@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bpo3u3lteo08b"]
+
+[ext_resource type="Script" uid="uid://11og5hcskwdm" path="res://scripts/planet.gd" id="1_cktii"]
+[ext_resource type="Texture2D" uid="uid://uo5h8cjlxktq" path="res://artwork/2d/Planets/Earth_Planet/textures/earth albedo.jpg" id="2_h8ms6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1pdw"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_jpasd"]
+material = SubResource("StandardMaterial3D_r1pdw")
+radius = 2.5
+height = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2rdvs"]
+albedo_texture = ExtResource("2_h8ms6")
+
+[node name="Planet" type="Node3D" unique_id=1801841341]
+script = ExtResource("1_cktii")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1877294524]
+mesh = SubResource("SphereMesh_jpasd")
+surface_material_override/0 = SubResource("StandardMaterial3D_2rdvs")
