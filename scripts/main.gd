@@ -1,7 +1,7 @@
 extends Node
 
 @export var satellite_scene: PackedScene
-@export var satellite_cost: int = 100
+@export var satellite_cost: int = 1
 @onready var world: Node = $SubViewport
 
 # Called when the node enters the scene tree for the first time.

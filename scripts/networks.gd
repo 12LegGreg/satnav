@@ -1,30 +1,35 @@
 extends MeshInstance3D
 
-@export var target_satellite: Node
 @export var dash_length: float = 0.1
 @export var gap_length: float = 0.1
+@export var orbit_axis: Vector3 = Vector3(0,1,0.3)
+@export var orbit_radius: float = 2.6
+@export var capacity: int = 5
+@export var unlocked: bool = true
 
+var satellites: Array = []
 var line_mesh: ImmediateMesh
+var ring_material: StandardMaterial3D
 
 func _ready() -> void:
 	line_mesh = ImmediateMesh.new()
 	self.mesh = line_mesh
-	var material := StandardMaterial3D.new()
-	material.albedo_color = Color.WHITE
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	ring_material = StandardMaterial3D.new()
+	ring_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	line_mesh.surface_set_material(0,ring_material)
+	update_visual_state()
 	rebuild_mesh()
+
+func update_visual_state():
+	if unlocked:
+		ring_material.albedo_color = Color.WHITE
+	else:
+		ring_material.albedo_color = Color(0.4, 0.4, 0.4)
 
 func _process(delta:float):
 	rebuild_mesh()
 
 func rebuild_mesh():
-	if not is_instance_valid(target_satellite):
-		queue_free()
-		return
-
-	var orbit_radius = target_satellite.orbit_radius
-	var orbit_axis = target_satellite.orbit_axis
-	
 	line_mesh.clear_surfaces()
 	line_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	var angle := 0.0
@@ -35,3 +40,4 @@ func rebuild_mesh():
 		line_mesh.surface_add_vertex(end_point)
 		angle += dash_length + gap_length
 	line_mesh.surface_end()
+	line_mesh.surface_set_material(0, ring_material)
