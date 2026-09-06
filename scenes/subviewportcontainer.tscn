@@ -5,7 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://bpo3u3lteo08b" path="res://scenes/planet.tscn" id="2_exobn"]
 [ext_resource type="Shader" uid="uid://cvfk6h47wgiuj" path="res://resources/stars.gdshader" id="4_8slqr"]
 [ext_resource type="Script" uid="uid://dqusxuc44sw13" path="res://scripts/orbitline.gd" id="6_5pbd4"]
-[ext_resource type="Script" uid="uid://c3cc5xwrl0b87" path="res://scenes/resourceupdater.gd" id="6_5xloc"]
+[ext_resource type="Script" uid="uid://c3cc5xwrl0b87" path="res://scripts/resourceupdater.gd" id="6_5xloc"]
+[ext_resource type="Script" uid="uid://c3al4d32n2xp3" path="res://scenes/uiscript.gd" id="6_sueu4"]
+[ext_resource type="Script" uid="uid://brwcvtwh054qq" path="res://resources/themes/small_chamfered_panel.gd" id="8_1hojr"]
+[ext_resource type="Theme" uid="uid://c4tcrymt5j0ds" path="res://resources/themes/ui_theme.tres" id="8_sueu4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h4p0k"]
 shader = ExtResource("4_8slqr")
@@ -21,6 +24,26 @@ sky_material = SubResource("ShaderMaterial_h4p0k")
 [sub_resource type="Environment" id="Environment_jpasd"]
 background_mode = 2
 sky = SubResource("Sky_5bkp5")
+
+[sub_resource type="StyleBox" id="StyleBox_w23tb"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("8_1hojr")
+metadata/_custom_type_script = "uid://brwcvtwh054qq"
+
+[sub_resource type="StyleBox" id="StyleBox_1hojr"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("8_1hojr")
+metadata/_custom_type_script = "uid://brwcvtwh054qq"
 
 [node name="Subviewportcontainer" type="SubViewportContainer" unique_id=2066349943]
 texture_filter = 1
@@ -55,8 +78,116 @@ target_satellite = NodePath("../Satellite")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=858571204]
 layer = 10
+script = ExtResource("6_sueu4")
 
-[node name="Money" type="Label" parent="UI" unique_id=1433540025]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="MoneyLabel" type="PanelContainer" parent="UI" unique_id=105024894]
+anchors_preset = -1
+anchor_right = 0.21100001
+anchor_bottom = 0.063
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -0.072006226
+offset_bottom = 0.17599869
+theme_override_styles/panel = SubResource("StyleBox_w23tb")
+
+[node name="MoneyText" type="Label" parent="UI/MoneyLabel" unique_id=1433540025]
+layout_mode = 2
 script = ExtResource("6_5xloc")
+
+[node name="StatsPanel" type="PanelContainer" parent="UI" unique_id=930517216]
+anchors_preset = -1
+anchor_top = 0.06
+anchor_right = 0.22
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/StatsPanel" unique_id=1415766563]
+layout_mode = 2
+theme = ExtResource("8_sueu4")
+
+[node name="SatListPlaceholder" type="Label" parent="UI/StatsPanel/VBoxContainer" unique_id=1788075268]
+layout_mode = 2
+
+[node name="WinConditionBar" type="ProgressBar" parent="UI" unique_id=30880947]
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.01
+anchor_right = 0.65
+anchor_bottom = 0.05
+value = 15.0
+
+[node name="UpgradesPanel" type="PanelContainer" parent="UI" unique_id=132265211]
+anchors_preset = -1
+anchor_left = 0.78
+anchor_top = 0.06
+anchor_right = 0.96
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UpgradesPanel" unique_id=1576994950]
+layout_mode = 2
+theme = ExtResource("8_sueu4")
+
+[node name="UpgradesPlaceholder" type="Label" parent="UI/UpgradesPanel/VBoxContainer" unique_id=635223549]
+layout_mode = 2
+text = "Upgrades List"
+
+[node name="ShopToggleButton" type="Button" parent="UI" unique_id=430323560]
+anchors_preset = -1
+anchor_left = 0.95
+anchor_top = 0.06
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.120003
+offset_right = -12.0
+offset_bottom = -11.880005
+
+[node name="ShopLabel" type="Label" parent="UI/ShopToggleButton" unique_id=947415400]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.719971
+offset_top = -11.440002
+offset_right = 28.28003
+offset_bottom = 11.559998
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5707964
+text = "Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DateTimePanel" type="PanelContainer" parent="UI" unique_id=1256986722]
+anchors_preset = -1
+anchor_left = 0.78
+anchor_right = 1.0
+anchor_bottom = 0.101
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.448006
+theme_override_styles/panel = SubResource("StyleBox_1hojr")
+
+[node name="DateTimeHbox" type="HBoxContainer" parent="UI/DateTimePanel" unique_id=1834353003]
+layout_mode = 2
+
+[node name="PlaceholderDay" type="Label" parent="UI/DateTimePanel/DateTimeHbox" unique_id=1892026360]
+layout_mode = 2
+text = "Day 1"
+
+[node name="PlaceholderTime" type="Label" parent="UI/DateTimePanel/DateTimeHbox" unique_id=2119754343]
+layout_mode = 2
+text = "08:00
+"
+
+[connection signal="pressed" from="UI/ShopToggleButton" to="UI" method="_on_shop_toggle_button_pressed"]

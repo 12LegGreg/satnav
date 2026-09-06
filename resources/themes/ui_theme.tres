@@ -1,0 +1,79 @@
+[gd_resource type="Theme" format=3 uid="uid://c4tcrymt5j0ds"]
+
+[ext_resource type="Script" uid="uid://pryv227ltdv" path="res://resources/themes/large_chamfered_panel.gd" id="1_555wp"]
+[ext_resource type="Script" uid="uid://g4a6rkgrmtc4" path="res://resources/themes/button_hover_style.gd" id="1_nlrje"]
+[ext_resource type="FontFile" uid="uid://cyw6hg6bv3125" path="res://artwork/fonts/Share_Tech_Mono/ShareTechMono-Regular.ttf" id="2_3jxlk"]
+[ext_resource type="Script" uid="uid://chopsndox1l6t" path="res://resources/themes/button_style.gd" id="2_i1sty"]
+[ext_resource type="Script" uid="uid://dkx3cgjayxw02" path="res://resources/themes/button_pressed_style.gd" id="3_301rc"]
+[ext_resource type="Script" uid="uid://dhrrvpswgf1eb" path="res://resources/themes/progress_fill_style.gd" id="4_301rc"]
+[ext_resource type="Script" uid="uid://dye50smy1igrw" path="res://resources/themes/progress_bar_style.gd" id="4_be67o"]
+
+[sub_resource type="StyleBox" id="StyleBox_77iv5"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("1_nlrje")
+metadata/_custom_type_script = "uid://g4a6rkgrmtc4"
+
+[sub_resource type="StyleBox" id="StyleBox_n26cp"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("2_i1sty")
+metadata/_custom_type_script = "uid://chopsndox1l6t"
+
+[sub_resource type="StyleBox" id="StyleBox_5nt54"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("3_301rc")
+metadata/_custom_type_script = "uid://dkx3cgjayxw02"
+
+[sub_resource type="StyleBox" id="StyleBox_be67o"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("1_555wp")
+border_color = Color(0.869, 0.945, 0.98, 1)
+metadata/_custom_type_script = "uid://pryv227ltdv"
+
+[sub_resource type="StyleBox" id="StyleBox_i1sty"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("4_be67o")
+metadata/_custom_type_script = "uid://dye50smy1igrw"
+
+[sub_resource type="StyleBox" id="StyleBox_w23tb"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("4_301rc")
+metadata/_custom_type_script = "uid://dhrrvpswgf1eb"
+
+[resource]
+default_font = ExtResource("2_3jxlk")
+Button/styles/hover = SubResource("StyleBox_77iv5")
+Button/styles/normal = SubResource("StyleBox_n26cp")
+Button/styles/pressed = SubResource("StyleBox_5nt54")
+PanelContainer/styles/panel = SubResource("StyleBox_be67o")
+ProgressBar/styles/background = SubResource("StyleBox_i1sty")
+ProgressBar/styles/fill = SubResource("StyleBox_w23tb")
