@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dl4ire4nnd12j"]
 
+[ext_resource type="Script" uid="uid://dys8vp8svrcr3" path="res://scripts/main.gd" id="1_1hojr"]
 [ext_resource type="PackedScene" uid="uid://cn6v0diiax22g" path="res://scenes/satellite.tscn" id="1_e4q2a"]
 [ext_resource type="Script" uid="uid://b24neytc32w56" path="res://scripts/camera3d.gd" id="1_h4p0k"]
 [ext_resource type="PackedScene" uid="uid://bpo3u3lteo08b" path="res://scenes/planet.tscn" id="2_exobn"]
@@ -7,7 +8,6 @@
 [ext_resource type="Script" uid="uid://dqusxuc44sw13" path="res://scripts/orbitline.gd" id="6_5pbd4"]
 [ext_resource type="Script" uid="uid://c3cc5xwrl0b87" path="res://scripts/resourceupdater.gd" id="6_5xloc"]
 [ext_resource type="Script" uid="uid://c3al4d32n2xp3" path="res://scenes/uiscript.gd" id="6_sueu4"]
-[ext_resource type="Script" uid="uid://brwcvtwh054qq" path="res://resources/themes/small_chamfered_panel.gd" id="8_1hojr"]
 [ext_resource type="Theme" uid="uid://c4tcrymt5j0ds" path="res://resources/themes/ui_theme.tres" id="8_sueu4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h4p0k"]
@@ -25,27 +25,7 @@ sky_material = SubResource("ShaderMaterial_h4p0k")
 background_mode = 2
 sky = SubResource("Sky_5bkp5")
 
-[sub_resource type="StyleBox" id="StyleBox_w23tb"]
-resource_local_to_scene = false
-resource_name = ""
-content_margin_left = -1.0
-content_margin_top = -1.0
-content_margin_right = -1.0
-content_margin_bottom = -1.0
-script = ExtResource("8_1hojr")
-metadata/_custom_type_script = "uid://brwcvtwh054qq"
-
-[sub_resource type="StyleBox" id="StyleBox_1hojr"]
-resource_local_to_scene = false
-resource_name = ""
-content_margin_left = -1.0
-content_margin_top = -1.0
-content_margin_right = -1.0
-content_margin_bottom = -1.0
-script = ExtResource("8_1hojr")
-metadata/_custom_type_script = "uid://brwcvtwh054qq"
-
-[node name="Subviewportcontainer" type="SubViewportContainer" unique_id=2066349943]
+[node name="Main" type="SubViewportContainer" unique_id=2066349943]
 texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,6 +33,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
+script = ExtResource("1_1hojr")
+satellite_scene = ExtResource("1_e4q2a")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1721452540]
 handle_input_locally = false
@@ -88,7 +70,7 @@ offset_left = 12.0
 offset_top = 12.0
 offset_right = -0.072006226
 offset_bottom = 0.17599869
-theme_override_styles/panel = SubResource("StyleBox_w23tb")
+theme_type_variation = &"SmallPanel"
 
 [node name="MoneyText" type="Label" parent="UI/MoneyLabel" unique_id=1433540025]
 layout_mode = 2
@@ -171,22 +153,24 @@ vertical_alignment = 1
 anchors_preset = -1
 anchor_left = 0.78
 anchor_right = 1.0
-anchor_bottom = 0.101
+anchor_bottom = 0.082
 offset_left = 12.0
 offset_top = 12.0
 offset_right = -12.0
-offset_bottom = -12.448006
-theme_override_styles/panel = SubResource("StyleBox_1hojr")
+offset_bottom = -0.13600159
+theme_type_variation = &"SmallPanel"
 
 [node name="DateTimeHbox" type="HBoxContainer" parent="UI/DateTimePanel" unique_id=1834353003]
 layout_mode = 2
 
 [node name="PlaceholderDay" type="Label" parent="UI/DateTimePanel/DateTimeHbox" unique_id=1892026360]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Day 1"
 
 [node name="PlaceholderTime" type="Label" parent="UI/DateTimePanel/DateTimeHbox" unique_id=2119754343]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "08:00
 "
 
