@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bpo3u3lteo08b"]
 
-[ext_resource type="Script" uid="uid://11og5hcskwdm" path="res://scripts/planet.gd" id="1_cktii"]
+[ext_resource type="Script" uid="uid://11og5hcskwdm" path="res://scripts/gamemechanics/planet.gd" id="1_cktii"]
 [ext_resource type="Texture2D" uid="uid://uo5h8cjlxktq" path="res://artwork/2d/Planets/Earth_Planet/textures/earth albedo.jpg" id="2_h8ms6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1pdw"]

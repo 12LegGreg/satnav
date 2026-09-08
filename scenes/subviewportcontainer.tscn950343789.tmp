@@ -1,19 +1,15 @@
 [gd_scene format=3 uid="uid://dl4ire4nnd12j"]
 
-[ext_resource type="Script" uid="uid://dys8vp8svrcr3" path="res://scripts/gamemechanics/main.gd" id="1_1hojr"]
+[ext_resource type="Script" uid="uid://dys8vp8svrcr3" path="res://scripts/main.gd" id="1_1hojr"]
 [ext_resource type="PackedScene" uid="uid://cn6v0diiax22g" path="res://scenes/satellite.tscn" id="1_e4q2a"]
-[ext_resource type="Script" uid="uid://b24neytc32w56" path="res://scripts/gamemechanics/camera3d.gd" id="1_h4p0k"]
+[ext_resource type="Script" uid="uid://b24neytc32w56" path="res://scripts/camera3d.gd" id="1_h4p0k"]
 [ext_resource type="PackedScene" uid="uid://bpo3u3lteo08b" path="res://scenes/planet.tscn" id="2_exobn"]
-[ext_resource type="PackedScene" uid="uid://bugu1uis6n020" path="res://scenes/station.tscn" id="3_a4ibx"]
 [ext_resource type="Shader" uid="uid://cvfk6h47wgiuj" path="res://resources/stars.gdshader" id="4_8slqr"]
-[ext_resource type="Script" uid="uid://c3cc5xwrl0b87" path="res://scripts/gamemechanics/moneyupdater.gd" id="6_5xloc"]
-[ext_resource type="Script" uid="uid://c3al4d32n2xp3" path="res://scripts/gamemechanics/uiscript.gd" id="6_sueu4"]
-[ext_resource type="Script" uid="uid://dobopjt7kdmhn" path="res://scripts/networks/satellite_network_manager.gd" id="7_3tep6"]
-[ext_resource type="PackedScene" uid="uid://byw2o1v2gvakk" path="res://scenes/satellitenetwork.tscn" id="7_w23tb"]
-[ext_resource type="Script" uid="uid://npoiu27ilwm" path="res://scripts/networks/station_network_manager.gd" id="8_3tep6"]
+[ext_resource type="Script" uid="uid://c3cc5xwrl0b87" path="res://scripts/resourceupdater.gd" id="6_5xloc"]
+[ext_resource type="Script" uid="uid://c3al4d32n2xp3" path="res://scripts/uiscript.gd" id="6_sueu4"]
+[ext_resource type="Script" uid="uid://dobopjt7kdmhn" path="res://scripts/network_manager.gd" id="7_3tep6"]
+[ext_resource type="PackedScene" uid="uid://byw2o1v2gvakk" path="res://scenes/network.tscn" id="7_w23tb"]
 [ext_resource type="Theme" uid="uid://c4tcrymt5j0ds" path="res://resources/themes/ui_theme.tres" id="8_sueu4"]
-[ext_resource type="PackedScene" uid="uid://cdd6avsdc3pyc" path="res://scenes/stationnetwork.tscn" id="9_n26cp"]
-[ext_resource type="Script" uid="uid://dfq307sdbe0u6" path="res://scripts/gamemechanics/scienceupdater.gd" id="13_oqesm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h4p0k"]
 shader = ExtResource("4_8slqr")
@@ -39,8 +35,6 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 script = ExtResource("1_1hojr")
-satellite_scene = ExtResource("1_e4q2a")
-station_scene = ExtResource("3_a4ibx")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1721452540]
 handle_input_locally = false
@@ -53,24 +47,22 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 script = ExtResource("1_h4p0k")
 
+[node name="Satellite" parent="SubViewport" unique_id=1537568158 instance=ExtResource("1_e4q2a")]
+
 [node name="Planet" parent="SubViewport" unique_id=1801841341 instance=ExtResource("2_exobn")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport" unique_id=1703232413]
 environment = SubResource("Environment_jpasd")
 
-[node name="SatelliteNetworkManager" type="Node" parent="SubViewport" unique_id=200312483]
+[node name="NetworkManager" type="Node" parent="SubViewport" unique_id=200312483]
 script = ExtResource("7_3tep6")
 network_scene = ExtResource("7_w23tb")
-
-[node name="StationNetworkManager" type="Node" parent="SubViewport" unique_id=369845698]
-script = ExtResource("8_3tep6")
-network_scene = ExtResource("9_n26cp")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=858571204]
 layer = 10
 script = ExtResource("6_sueu4")
 
-[node name="ResourcesPanel" type="PanelContainer" parent="UI" unique_id=105024894]
+[node name="MoneyLabel" type="PanelContainer" parent="UI" unique_id=105024894]
 anchors_preset = -1
 anchor_right = 0.21100001
 anchor_bottom = 0.063
@@ -78,19 +70,11 @@ offset_left = 12.0
 offset_top = 12.0
 offset_right = -0.072006226
 offset_bottom = 0.17599869
-theme = ExtResource("8_sueu4")
 theme_type_variation = &"SmallPanel"
 
-[node name="ResourcesContainer" type="HBoxContainer" parent="UI/ResourcesPanel" unique_id=652255396]
-layout_mode = 2
-
-[node name="MoneyText" type="Label" parent="UI/ResourcesPanel/ResourcesContainer" unique_id=1433540025]
+[node name="MoneyText" type="Label" parent="UI/MoneyLabel" unique_id=1433540025]
 layout_mode = 2
 script = ExtResource("6_5xloc")
-
-[node name="ScienceText" type="Label" parent="UI/ResourcesPanel/ResourcesContainer" unique_id=864010872]
-layout_mode = 2
-script = ExtResource("13_oqesm")
 
 [node name="StatsPanel" type="PanelContainer" parent="UI" unique_id=930517216]
 anchors_preset = -1
@@ -170,25 +154,23 @@ anchors_preset = -1
 anchor_left = 0.78
 anchor_right = 1.0
 anchor_bottom = 0.082
-offset_left = 12.440063
+offset_left = 12.0
 offset_top = 12.0
 offset_right = -12.0
-offset_bottom = -12.0
+offset_bottom = -0.13600159
 theme_type_variation = &"SmallPanel"
 
 [node name="DateTimeHbox" type="HBoxContainer" parent="UI/DateTimePanel" unique_id=1834353003]
 layout_mode = 2
-size_flags_vertical = 4
-offset_transform_enabled = true
 
 [node name="PlaceholderDay" type="Label" parent="UI/DateTimePanel/DateTimeHbox" unique_id=1892026360]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 12
 text = "Day 1"
 
 [node name="PlaceholderTime" type="Label" parent="UI/DateTimePanel/DateTimeHbox" unique_id=2119754343]
 layout_mode = 2
-theme_override_font_sizes/font_size = 9
+theme_override_font_sizes/font_size = 12
 text = "08:00
 "
 

@@ -4,7 +4,7 @@ class_name large_chamfered_box
 @export var bg_color: Color = Color(0.04, 0.08, 0.14, 0.8)
 @export var border_color: Color = Color(0.451, 0.755, 0.883, 1.0)
 @export var border_width: float = 2.0
-@export var chamfer_size: float = 12.0
+@export var chamfer_size: float = 6.0
 
 func _get_points(rect: Rect2, inset: float) -> PackedVector2Array:
 	var r = rect.grow(-inset)

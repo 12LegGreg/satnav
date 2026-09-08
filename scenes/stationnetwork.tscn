@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cdd6avsdc3pyc"]
+
+[ext_resource type="Script" uid="uid://cihut4hffrs1a" path="res://scripts/networks/stationnetworks.gd" id="1_6hkwb"]
+
+[node name="StationNetwork" type="MeshInstance3D" unique_id=375977397]
+script = ExtResource("1_6hkwb")
