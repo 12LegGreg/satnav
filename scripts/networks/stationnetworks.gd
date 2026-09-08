@@ -7,7 +7,7 @@ extends MeshInstance3D
 @export var capacity: int = 5
 @export var unlocked: bool = true
 
-var satellites: Array = []
+var stations: Array = []
 var line_mesh: ImmediateMesh
 var ring_material: StandardMaterial3D
 
@@ -48,23 +48,23 @@ func get_perpendicular_vector(axis: Vector3) -> Vector3:
 		reference = Vector3.RIGHT
 	return axis.normalized().cross(reference).normalized()
 
-func add_satellite(satellite: Node) -> bool:
-	if not unlocked or satellites.size() >= capacity:
+func add_station(station: Node) -> bool:
+	if not unlocked or stations.size() >= capacity:
 		return false
-	satellite.orbit_axis = orbit_axis
-	satellite.orbit_radius = orbit_radius
-	satellite.assigned_network = self
-	satellites.append(satellite)
-	redistribute_satellites()
+	station.orbit_axis = orbit_axis
+	station.orbit_radius = orbit_radius
+	station.assigned_network = self
+	stations.append(station)
+	redistribute_stations()
 	return true
 
-func redistribute_satellites() -> void:
-	var count = satellites.size()
+func redistribute_stations() -> void:
+	var count = stations.size()
 	if count == 0:
 		return
 	for i in range(count):
-		satellites[i].orbit_angle = i * (TAU / count)
+		stations[i].orbit_angle = i * (TAU / count)
 		
-func remove_satellite(satellite: Node) -> void:
-	satellites.erase(satellite)
-	redistribute_satellites()
+func remove_station(station: Node) -> void:
+	stations.erase(station)
+	redistribute_stations()

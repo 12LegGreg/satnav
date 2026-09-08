@@ -60,11 +60,11 @@ environment = SubResource("Environment_jpasd")
 
 [node name="SatelliteNetworkManager" type="Node" parent="SubViewport" unique_id=200312483]
 script = ExtResource("7_3tep6")
-network_scene = ExtResource("7_w23tb")
+satellite_network_scene = ExtResource("7_w23tb")
 
 [node name="StationNetworkManager" type="Node" parent="SubViewport" unique_id=369845698]
 script = ExtResource("8_3tep6")
-network_scene = ExtResource("9_n26cp")
+station_network_scene = ExtResource("9_n26cp")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=858571204]
 layer = 10

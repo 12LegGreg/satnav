@@ -66,7 +66,7 @@ func find_available_satellite_network():
 	
 func find_available_station_network():
 	for network in station_network_manager.get_children():
-		if network.unlocked and network.station.size() < network.capacity:
+		if network.unlocked and network.stations.size() < network.capacity:
 			return network
 	return null
 
