@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://b24neytc32w56" path="res://scripts/gamemechanics/camera3d.gd" id="1_h4p0k"]
 [ext_resource type="PackedScene" uid="uid://bpo3u3lteo08b" path="res://scenes/planet.tscn" id="2_exobn"]
 [ext_resource type="PackedScene" uid="uid://bugu1uis6n020" path="res://scenes/station.tscn" id="3_a4ibx"]
-[ext_resource type="Shader" uid="uid://cvfk6h47wgiuj" path="res://resources/stars.gdshader" id="4_8slqr"]
+[ext_resource type="Shader" uid="uid://cvfk6h47wgiuj" path="res://resources/themes/stars.gdshader" id="4_8slqr"]
 [ext_resource type="Script" uid="uid://c3cc5xwrl0b87" path="res://scripts/gamemechanics/moneyupdater.gd" id="6_5xloc"]
 [ext_resource type="Script" uid="uid://c3al4d32n2xp3" path="res://scripts/gamemechanics/uiscript.gd" id="6_sueu4"]
 [ext_resource type="Script" uid="uid://dobopjt7kdmhn" path="res://scripts/networks/satellite_network_manager.gd" id="7_3tep6"]

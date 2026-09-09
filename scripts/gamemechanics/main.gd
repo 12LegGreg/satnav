@@ -32,7 +32,7 @@ func update_coverage():
 	if total_seats > 0:
 		win_bar.value = (float(filled_seats) / float(total_seats)) * 100.0
 		
-func try_buy_satellite():
+func try_buy_satellite(chosen_type: SatelliteTypeData = null):
 	if Economy.money < satellite_cost:
 		print("Not enough money")
 		return
@@ -42,6 +42,8 @@ func try_buy_satellite():
 		return
 	Economy.add_money(-satellite_cost)
 	var new_satellite = satellite_scene.instantiate()
+	if chosen_type:
+		new_satellite.type_data = chosen_type
 	target_network.add_satellite(new_satellite)
 	world.add_child(new_satellite)
 	

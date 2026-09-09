@@ -1,6 +1,6 @@
 extends Node
 @export var satellite_network_scene: PackedScene
-@export var orbit_radius: float = 2.8
+@export var sat_network_orbit_radius: float = 2.8
 @export var meridian_count: int = 8
 @export var second_meridian_count: int = 8
 @export var inclination_steps: int = 3
@@ -35,6 +35,6 @@ func _ready() -> void:
 func spawn_network(axis: Vector3, is_unlocked: bool) -> void:
 	var new_network = satellite_network_scene.instantiate()
 	new_network.orbit_axis = axis
-	new_network.orbit_radius = orbit_radius
+	new_network.orbit_radius = sat_network_orbit_radius
 	new_network.unlocked = is_unlocked
 	add_child(new_network)

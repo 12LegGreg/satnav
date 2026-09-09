@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="StationTypeData" format=3 uid="uid://nxdsuvcrwvis"]
+
+[ext_resource type="Script" uid="uid://cy4my1hbjwbxl" path="res://scripts/satellites+stations/stationtypedata.gd" id="1_610jd"]
+
+[resource]
+script = ExtResource("1_610jd")
+metadata/_custom_type_script = "uid://cy4my1hbjwbxl"

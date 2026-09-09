@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bcpi4p0blijkp" path="res://scripts/satellites+stations/satellite.gd" id="1_icwpa"]
 [ext_resource type="Texture2D" uid="uid://3uab6vjmbida" path="res://artwork/2d/Custom/Sat1.png" id="2_icwpa"]
+[ext_resource type="Resource" uid="uid://ddoarepo24hgf" path="res://resources/basic_satellite.tres" id="2_x51yp"]
 
 [node name="Satellite" type="Node3D" unique_id=1537568158]
 script = ExtResource("1_icwpa")
+type_data = ExtResource("2_x51yp")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1962420998]
 billboard = 1
