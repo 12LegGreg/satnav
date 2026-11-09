@@ -14,6 +14,8 @@
 [ext_resource type="Theme" uid="uid://c4tcrymt5j0ds" path="res://resources/themes/ui_theme.tres" id="8_sueu4"]
 [ext_resource type="PackedScene" uid="uid://cdd6avsdc3pyc" path="res://scenes/stationnetwork.tscn" id="9_n26cp"]
 [ext_resource type="Script" uid="uid://dfq307sdbe0u6" path="res://scripts/gamemechanics/scienceupdater.gd" id="13_oqesm"]
+[ext_resource type="Script" uid="uid://c4jr1vheboypm" path="res://scripts/gamemechanics/statspanel.gd" id="15_fwkcl"]
+[ext_resource type="PackedScene" uid="uid://cxchbdxk70q8o" path="res://scenes/shoppanel.tscn" id="16_cca8a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h4p0k"]
 shader = ExtResource("4_8slqr")
@@ -66,9 +68,10 @@ satellite_network_scene = ExtResource("7_w23tb")
 script = ExtResource("8_3tep6")
 station_network_scene = ExtResource("9_n26cp")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=858571204]
+[node name="UI" type="CanvasLayer" parent="." unique_id=858571204 node_paths=PackedStringArray("shop_panel")]
 layer = 10
 script = ExtResource("6_sueu4")
+shop_panel = NodePath("ShopPanel")
 
 [node name="ResourcesPanel" type="PanelContainer" parent="UI" unique_id=105024894]
 anchors_preset = -1
@@ -92,7 +95,7 @@ script = ExtResource("6_5xloc")
 layout_mode = 2
 script = ExtResource("13_oqesm")
 
-[node name="StatsPanel" type="PanelContainer" parent="UI" unique_id=930517216]
+[node name="StatsPanel" type="PanelContainer" parent="UI" unique_id=930517216 node_paths=PackedStringArray("satellite_network_manager", "station_network_manager")]
 anchors_preset = -1
 anchor_top = 0.06
 anchor_right = 0.22
@@ -101,13 +104,16 @@ offset_left = 12.0
 offset_top = 12.0
 offset_right = -12.0
 offset_bottom = -12.0
+script = ExtResource("15_fwkcl")
+satellite_network_manager = NodePath("../../SubViewport/SatelliteNetworkManager")
+station_network_manager = NodePath("../../SubViewport/StationNetworkManager")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/StatsPanel" unique_id=1415766563]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/StatsPanel" unique_id=1213948634]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/StatsPanel/ScrollContainer" unique_id=1415766563]
 layout_mode = 2
 theme = ExtResource("8_sueu4")
-
-[node name="SatListPlaceholder" type="Label" parent="UI/StatsPanel/VBoxContainer" unique_id=1788075268]
-layout_mode = 2
 
 [node name="WinConditionBar" type="ProgressBar" parent="UI" unique_id=30880947]
 anchors_preset = -1
@@ -191,5 +197,8 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 9
 text = "08:00
 "
+
+[node name="ShopPanel" parent="UI" unique_id=14554493 instance=ExtResource("16_cca8a")]
+visible = false
 
 [connection signal="pressed" from="UI/ShopToggleButton" to="UI" method="_on_shop_toggle_button_pressed"]

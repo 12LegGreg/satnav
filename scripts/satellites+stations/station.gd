@@ -10,6 +10,11 @@ var orbit_radius: float
 var angle_since_payout: float = 0.0
 var orbit_angle: float = 0.0
 
+func _ready() -> void:
+	current_fuel = type_data.max_fuel
+	current_hp = type_data.max_hp
+	orbit_radius = type_data.orbit_radius
+
 func _process(delta: float) -> void:
 	orbit_angle += type_data.orbit_speed * delta
 	var base_point = get_perpendicular_vector(orbit_axis) * orbit_radius
@@ -25,11 +30,20 @@ func _process(delta: float) -> void:
 	if current_fuel <= 0:
 		orbit_radius -= type_data.decay_rate * delta
 		if orbit_radius < 2.6:
-			if assigned_network:
-				assigned_network.remove_station(self)
-			Gameevents.station_destroyed.emit()
-			queue_free()
-			
+			destroy()
+
+func take_damage(amount: float):
+	current_hp -= amount
+	current_hp = clamp(current_hp, 0, type_data.max_hp)
+	if current_hp <= 0:
+		destroy()
+		
+func destroy():
+	if assigned_network:
+		assigned_network.remove_station(self)
+	Gameevents.satellite_destroyed.emit()
+	queue_free()
+
 			
 func get_perpendicular_vector(axis: Vector3) -> Vector3:
 	var reference = Vector3.UP
