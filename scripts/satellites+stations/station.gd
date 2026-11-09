@@ -41,7 +41,7 @@ func take_damage(amount: float):
 func destroy():
 	if assigned_network:
 		assigned_network.remove_station(self)
-	Gameevents.satellite_destroyed.emit()
+	Gameevents.station_destroyed.emit()
 	queue_free()
 
 			

@@ -1,5 +1,7 @@
 extends Control
 
+@export var main: Node
+
 func _ready() -> void:
 	visible = false
 
@@ -9,7 +11,8 @@ func open_shop() -> void:
 
 func close_shop() -> void:
 	visible = false
-	get_tree().paused = false
+	if not main.game_over:
+		get_tree().paused = false
 
 func _on_close_button_pressed() -> void:
 	close_shop()
