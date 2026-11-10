@@ -51,22 +51,25 @@ render_target_update_mode = 4
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport" unique_id=1614182]
 
-[node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=1608665674]
+[node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=1608665674 node_paths=PackedStringArray("planet")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 script = ExtResource("1_h4p0k")
+planet = NodePath("../Planet")
 
 [node name="Planet" parent="SubViewport" unique_id=1801841341 instance=ExtResource("2_exobn")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport" unique_id=1703232413]
 environment = SubResource("Environment_jpasd")
 
-[node name="SatelliteNetworkManager" type="Node" parent="SubViewport" unique_id=200312483]
+[node name="SatelliteNetworkManager" type="Node" parent="SubViewport" unique_id=200312483 node_paths=PackedStringArray("planet")]
 script = ExtResource("7_3tep6")
 satellite_network_scene = ExtResource("7_w23tb")
+planet = NodePath("../Planet")
 
-[node name="StationNetworkManager" type="Node" parent="SubViewport" unique_id=369845698]
+[node name="StationNetworkManager" type="Node" parent="SubViewport" unique_id=369845698 node_paths=PackedStringArray("planet")]
 script = ExtResource("8_3tep6")
 station_network_scene = ExtResource("9_n26cp")
+planet = NodePath("../Planet")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=858571204 node_paths=PackedStringArray("shop_panel")]
 layer = 10

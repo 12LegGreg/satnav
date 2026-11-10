@@ -1,10 +1,11 @@
 extends Node
+
 @export var satellite_network_scene: PackedScene
-@export var sat_network_orbit_radius: float = 2.8
 @export var meridian_count: int = 8
 @export var second_meridian_count: int = 8
 @export var inclination_steps: int = 3
 @export var inclination_density: int = 6
+@export var planet: Node3D
 
 func _ready() -> void:
 	var axes: Array = []
@@ -35,6 +36,6 @@ func _ready() -> void:
 func spawn_network(axis: Vector3, is_unlocked: bool) -> void:
 	var new_network = satellite_network_scene.instantiate()
 	new_network.orbit_axis = axis
-	new_network.orbit_radius = sat_network_orbit_radius
+	new_network.orbit_radius = planet.planet_radius + 2.0
 	new_network.unlocked = is_unlocked
 	add_child(new_network)

@@ -5,6 +5,8 @@ extends Node
 @export var second_meridian_count: int = 0
 @export var inclination_steps: int = 1
 @export var inclination_density: int = 6
+@export var planet: Node3D
+
 
 func _ready() -> void:
 	var axes: Array = []
@@ -35,6 +37,6 @@ func _ready() -> void:
 func spawn_network(axis: Vector3, is_unlocked: bool) -> void:
 	var new_network = station_network_scene.instantiate()
 	new_network.orbit_axis = axis
-	new_network.orbit_radius = stn_network_orbit_radius
+	new_network.orbit_radius = planet.planet_radius + 4
 	new_network.unlocked = is_unlocked
 	add_child(new_network)

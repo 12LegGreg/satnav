@@ -1,11 +1,14 @@
 extends Camera3D
 
+@export var planet: Node3D
+
 var is_dragging: bool = false
 var pitch: float = 0.0
 var yaw: float = 0.0 
-var camera_distance: float = 5.0
+@onready var camera_distance: float = planet.planet_radius * 2
 var sensitivity: float = 0.01
 var zoom_speed: float = 0.5
+
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -21,7 +24,7 @@ func _input(event):
 			camera_distance += zoom_speed
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			camera_distance -= zoom_speed
-		camera_distance = clamp(camera_distance, 1.5,20.0)
+		camera_distance = clamp(camera_distance, planet.planet_radius * 1.4,20.0)
 
 func _process(delta: float)-> void:
 	position = Vector3(

@@ -3,7 +3,7 @@ extends MeshInstance3D
 @export var dash_length: float = 0.1
 @export var gap_length: float = 0.1
 @export var orbit_axis: Vector3 = Vector3(0,1,0.3)
-@export var orbit_radius: float = 2.8
+@export var orbit_radius: float = 2
 @export var capacity: int = 5
 @export var unlocked: bool = true
 
