@@ -14,7 +14,6 @@ var orbit_angle: float = 0.0
 func _ready():
 	current_fuel = type_data.max_fuel
 	current_hp = type_data.max_hp
-	orbit_radius = type_data.orbit_radius
 
 func _process(delta: float) -> void:
 	orbit_angle += type_data.orbit_speed * delta
