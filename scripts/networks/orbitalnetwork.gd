@@ -30,9 +30,6 @@ func update_visual_state():
 	else:
 		ring_material.albedo_color = locked_color
 
-func _process(delta:float):
-	rebuild_mesh()
-
 func rebuild_mesh() -> void:
 	var base_point = get_perpendicular_vector(orbit_axis) * orbit_radius
 	line_mesh.clear_surfaces()

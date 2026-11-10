@@ -1,9 +1,9 @@
 extends Node
 
 @export var satellite_scene: PackedScene
-@export var satellite_cost: int = 10
 @export var station_scene: PackedScene
-@export var station_cost: int = 50
+@export var default_satellite_type : SatelliteTypeData
+@export var default_station_type : StationTypeData
 @onready var world: Node = $SubViewport
 @onready var satellite_network_manager: Node = $SubViewport/SatelliteNetworkManager
 @onready var station_network_manager: Node = $SubViewport/StationNetworkManager
@@ -33,30 +33,32 @@ func update_coverage():
 		win_bar.value = (float(filled_seats) / float(total_seats)) * 100.0
 		
 func try_buy_satellite(chosen_type: SatelliteTypeData = null):
-	if Economy.money < satellite_cost:
+	var type_to_buy = chosen_type if chosen_type else default_satellite_type
+	if Economy.money < type_to_buy.purchase_cost:
 		print("Not enough money")
 		return
 	var target_network = find_available_satellite_network()
 	if target_network == null:
 		print ("No unlocked network has a free seat")
 		return
-	Economy.add_money(-satellite_cost)
+	Economy.add_money(-type_to_buy.purchase_cost)
 	var new_satellite = satellite_scene.instantiate()
-	if chosen_type:
-		new_satellite.type_data = chosen_type
+	new_satellite.type_data = type_to_buy
 	target_network.add_member(new_satellite)
 	world.add_child(new_satellite)
 	
-func try_buy_station():
-	if Economy.money < station_cost:
+func try_buy_station(chosen_type: StationTypeData = null):
+	var type_to_buy = chosen_type if chosen_type else default_station_type
+	if Economy.money < type_to_buy.purchase_cost:
 		print("Not enough money")
 		return
 	var target_network = find_available_station_network()
 	if target_network == null:
 		print ("No unlocked network has a free seat")
 		return
-	Economy.add_money(-station_cost)
+	Economy.add_money(-type_to_buy.purchase_cost)
 	var new_station = station_scene.instantiate()
+	new_station.type_data = type_to_buy
 	target_network.add_member(new_station)
 	world.add_child(new_station)
 	
@@ -76,7 +78,7 @@ func check_loss_conditions():
 	var total_satellites = 0
 	for network in satellite_network_manager.get_children():
 		total_satellites += network.members.size()
-	if total_satellites == 0 and Economy.money < satellite_cost:	
+	if total_satellites == 0 and Economy.money < default_satellite_type.purchase_cost:	
 		trigger_game_over("Bankrupt with no more satellites")
 
 func trigger_game_over(reason: String):	

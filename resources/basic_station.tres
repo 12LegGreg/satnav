@@ -4,7 +4,8 @@
 
 [resource]
 script = ExtResource("1_610jd")
-type_name = "Station"
+type_name = "Basic Station"
 fuel_consumption_rate = 1.0
 decay_rate = 0.05
+purchase_cost = 40
 metadata/_custom_type_script = "uid://cy4my1hbjwbxl"

@@ -12,7 +12,6 @@ var orbit_radius: float
 var angle_since_payout: float = 0.0
 var orbit_angle: float = 0.0
 
-
 func _ready():
 	current_fuel = type_data.max_fuel
 	current_hp = type_data.max_hp
