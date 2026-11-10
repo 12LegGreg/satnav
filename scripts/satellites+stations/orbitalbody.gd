@@ -3,6 +3,7 @@ extends Node3D
 
 @export var type_data: OrbitalTypeData
 @export var orbit_axis: Vector3 = Vector3(0,1,0.3)
+@onready var planet_radius: float
 
 var assigned_network: Node = null
 var current_fuel: float
@@ -28,7 +29,7 @@ func _process(delta: float) -> void:
 	current_fuel = clamp(current_fuel, 0, type_data.max_fuel)
 	if current_fuel <= 0:
 		orbit_radius -= type_data.decay_rate * delta
-		if orbit_radius < 2.6:
+		if orbit_radius < planet_radius * 1.05:
 			destroy()
 			
 func take_damage(amount: float):

@@ -6,6 +6,7 @@ extends MeshInstance3D
 @export var orbit_radius: float
 @export var capacity: int = 5
 @export var unlocked: bool = true
+var planet_radius: float
 
 var satellites: Array = []
 var line_mesh: ImmediateMesh

@@ -38,5 +38,6 @@ func spawn_network(axis: Vector3, is_unlocked: bool) -> void:
 	var new_network = station_network_scene.instantiate()
 	new_network.orbit_axis = axis
 	new_network.orbit_radius = planet.planet_radius + altitude_fraction
+	new_network.planet_radius = planet.planet_radius
 	new_network.unlocked = is_unlocked
 	add_child(new_network)

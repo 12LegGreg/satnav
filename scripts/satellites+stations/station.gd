@@ -6,7 +6,7 @@ func on_orbit_completed():
 
 func leave_network():
 	if assigned_network:
-		assigned_network.remove_satellite(self)
+		assigned_network.remove_station(self)
 		
 func announce_destroyed():
-	Gameevents.satellite_destroyed.emit()
+	Gameevents.station_destroyed.emit()
