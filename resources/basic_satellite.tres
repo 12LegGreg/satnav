@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_nlhiv")
+type_name = "Basic Satellite"
 metadata/_custom_type_script = "uid://bybo01xrw15qj"
