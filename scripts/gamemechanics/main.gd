@@ -14,7 +14,7 @@ var game_over: bool = false
 func _ready():
 	Gameevents.satellite_destroyed.connect(check_loss_conditions)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if game_over:
 		return
 	if Input.is_action_just_pressed("buy_satellite"):
