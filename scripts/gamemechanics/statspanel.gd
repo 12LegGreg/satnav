@@ -19,9 +19,9 @@ func _process(delta: float) -> void:
 func get_all_entities() -> Array:
 	var entities: Array = []
 	for network in satellite_network_manager.get_children():
-		entities.append_array(network.satellites)
+		entities.append_array(network.members)
 	for network in station_network_manager.get_children():
-		entities.append_array(network.stations)
+		entities.append_array(network.members)
 	return entities
 
 func sync_rows() -> void:

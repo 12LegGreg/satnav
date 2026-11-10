@@ -3,7 +3,7 @@ extends Node3D
 
 @export var type_data: OrbitalTypeData
 @export var orbit_axis: Vector3 = Vector3(0,1,0.3)
-@onready var planet_radius: float
+var planet_radius: float
 
 var assigned_network: Node = null
 var current_fuel: float
@@ -53,7 +53,9 @@ func on_orbit_completed():
 	pass
 	
 func leave_network():
-	pass
+	if assigned_network:
+		assigned_network.remove_member(self)
+		
 	
 func announce_destroyed():
 	pass

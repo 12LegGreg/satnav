@@ -1,4 +1,5 @@
 extends MeshInstance3D
+class_name OrbitNetwork
 
 @export var dash_length: float = 0.1
 @export var gap_length: float = 0.1
@@ -6,9 +7,12 @@ extends MeshInstance3D
 @export var orbit_radius: float
 @export var capacity: int = 5
 @export var unlocked: bool = true
+@export var locked_color: Color = Color(0.4,0.4,0.4)
+@export var unlocked_color: Color = Color.WHITE
+
 var planet_radius: float
 
-var stations: Array = []
+var members: Array = []
 var line_mesh: ImmediateMesh
 var ring_material: StandardMaterial3D
 
@@ -22,9 +26,9 @@ func _ready() -> void:
 
 func update_visual_state():
 	if unlocked:
-		ring_material.albedo_color = Color.CADET_BLUE
+		ring_material.albedo_color = unlocked_color
 	else:
-		ring_material.albedo_color = Color(0.135, 0.277, 0.386, 1.0)
+		ring_material.albedo_color = locked_color
 
 func _process(delta:float):
 	rebuild_mesh()
@@ -49,23 +53,24 @@ func get_perpendicular_vector(axis: Vector3) -> Vector3:
 		reference = Vector3.RIGHT
 	return axis.normalized().cross(reference).normalized()
 
-func add_station(station: Node) -> bool:
-	if not unlocked or stations.size() >= capacity:
+func add_member(body: Node) -> bool:
+	if not unlocked or members.size() >= capacity:
 		return false
-	station.orbit_axis = orbit_axis
-	station.orbit_radius = orbit_radius
-	station.assigned_network = self
-	stations.append(station)
-	redistribute_stations()
+	body.orbit_axis = orbit_axis
+	body.orbit_radius = orbit_radius
+	body.planet_radius = orbit_radius
+	body.assigned_network = self
+	members.append(body)
+	redistribute_members()
 	return true
 
-func redistribute_stations() -> void:
-	var count = stations.size()
+func redistribute_members() -> void:
+	var count = members.size()
 	if count == 0:
 		return
 	for i in range(count):
-		stations[i].orbit_angle = i * (TAU / count)
+		members[i].orbit_angle = i * (TAU / count)
 		
-func remove_station(station: Node) -> void:
-	stations.erase(station)
-	redistribute_stations()
+func remove_member(body: Node) -> void:
+	members.erase(body)
+	redistribute_members()

@@ -28,7 +28,7 @@ func update_coverage():
 	var total_seats = 0
 	for network in satellite_network_manager.get_children():
 		total_seats += network.capacity
-		filled_seats += network.satellites.size()
+		filled_seats += network.members.size()
 	if total_seats > 0:
 		win_bar.value = (float(filled_seats) / float(total_seats)) * 100.0
 		
@@ -44,7 +44,7 @@ func try_buy_satellite(chosen_type: SatelliteTypeData = null):
 	var new_satellite = satellite_scene.instantiate()
 	if chosen_type:
 		new_satellite.type_data = chosen_type
-	target_network.add_satellite(new_satellite)
+	target_network.add_member(new_satellite)
 	world.add_child(new_satellite)
 	
 func try_buy_station():
@@ -57,25 +57,25 @@ func try_buy_station():
 		return
 	Economy.add_money(-station_cost)
 	var new_station = station_scene.instantiate()
-	target_network.add_station(new_station)
+	target_network.add_member(new_station)
 	world.add_child(new_station)
 	
 func find_available_satellite_network():
 	for network in satellite_network_manager.get_children():
-		if network.unlocked and network.satellites.size() < network.capacity:
+		if network.unlocked and network.members.size() < network.capacity:
 			return network
 	return null
 	
 func find_available_station_network():
 	for network in station_network_manager.get_children():
-		if network.unlocked and network.stations.size() < network.capacity:
+		if network.unlocked and network.members.size() < network.capacity:
 			return network
 	return null
 
 func check_loss_conditions():
 	var total_satellites = 0
 	for network in satellite_network_manager.get_children():
-		total_satellites += network.satellites.size()
+		total_satellites += network.members.size()
 	if total_satellites == 0 and Economy.money < satellite_cost:	
 		trigger_game_over("Bankrupt with no more satellites")
 
