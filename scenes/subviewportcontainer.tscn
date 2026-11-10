@@ -8,9 +8,8 @@
 [ext_resource type="Shader" uid="uid://cvfk6h47wgiuj" path="res://resources/themes/stars.gdshader" id="4_8slqr"]
 [ext_resource type="Script" uid="uid://c3cc5xwrl0b87" path="res://scripts/gamemechanics/moneyupdater.gd" id="6_5xloc"]
 [ext_resource type="Script" uid="uid://c3al4d32n2xp3" path="res://scripts/gamemechanics/uiscript.gd" id="6_sueu4"]
-[ext_resource type="Script" uid="uid://dobopjt7kdmhn" path="res://scripts/networks/satellite_network_manager.gd" id="7_3tep6"]
+[ext_resource type="Script" uid="uid://1pjjyu4rhdmf" path="res://scripts/networks/orbit_network_manager.gd" id="7_oqesm"]
 [ext_resource type="PackedScene" uid="uid://byw2o1v2gvakk" path="res://scenes/satellitenetwork.tscn" id="7_w23tb"]
-[ext_resource type="Script" uid="uid://npoiu27ilwm" path="res://scripts/networks/station_network_manager.gd" id="8_3tep6"]
 [ext_resource type="Theme" uid="uid://c4tcrymt5j0ds" path="res://resources/themes/ui_theme.tres" id="8_sueu4"]
 [ext_resource type="PackedScene" uid="uid://cdd6avsdc3pyc" path="res://scenes/stationnetwork.tscn" id="9_n26cp"]
 [ext_resource type="Script" uid="uid://dfq307sdbe0u6" path="res://scripts/gamemechanics/scienceupdater.gd" id="13_oqesm"]
@@ -62,14 +61,22 @@ planet = NodePath("../Planet")
 environment = SubResource("Environment_jpasd")
 
 [node name="SatelliteNetworkManager" type="Node" parent="SubViewport" unique_id=200312483 node_paths=PackedStringArray("planet")]
-script = ExtResource("7_3tep6")
-satellite_network_scene = ExtResource("7_w23tb")
+script = ExtResource("7_oqesm")
+network_scene = ExtResource("7_w23tb")
+meridian_count = 8
+second_meridian_count = 8
+inclination_steps = 3
+inclination_density = 6
 planet = NodePath("../Planet")
+altitude_fraction = 1.0
 
 [node name="StationNetworkManager" type="Node" parent="SubViewport" unique_id=369845698 node_paths=PackedStringArray("planet")]
-script = ExtResource("8_3tep6")
-station_network_scene = ExtResource("9_n26cp")
+script = ExtResource("7_oqesm")
+network_scene = ExtResource("9_n26cp")
+meridian_count = 3
+inclination_steps = 1
 planet = NodePath("../Planet")
+altitude_fraction = 0.6
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=858571204 node_paths=PackedStringArray("shop_panel")]
 layer = 10

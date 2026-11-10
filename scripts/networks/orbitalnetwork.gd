@@ -58,7 +58,7 @@ func add_member(body: Node) -> bool:
 		return false
 	body.orbit_axis = orbit_axis
 	body.orbit_radius = orbit_radius
-	body.planet_radius = orbit_radius
+	body.planet_radius = planet_radius
 	body.assigned_network = self
 	members.append(body)
 	redistribute_members()

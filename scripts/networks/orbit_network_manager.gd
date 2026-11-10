@@ -1,12 +1,12 @@
 extends Node
-@export var station_network_scene: PackedScene
-@export var meridian_count: int = 3
-@export var second_meridian_count: int = 0
-@export var inclination_steps: int = 1
-@export var inclination_density: int = 6
-@export var planet: Node3D
-@export var altitude_fraction: float = 0.6
 
+@export var network_scene: PackedScene
+@export var meridian_count: int
+@export var second_meridian_count: int
+@export var inclination_steps: int
+@export var inclination_density: int
+@export var planet: Node3D
+@export var altitude_fraction: float
 
 func _ready() -> void:
 	var axes: Array = []
@@ -35,7 +35,7 @@ func _ready() -> void:
 		spawn_network(axes[i], i == unlocked_index)
 
 func spawn_network(axis: Vector3, is_unlocked: bool) -> void:
-	var new_network = station_network_scene.instantiate()
+	var new_network = network_scene.instantiate()
 	new_network.orbit_axis = axis
 	new_network.orbit_radius = planet.planet_radius + altitude_fraction
 	new_network.planet_radius = planet.planet_radius
