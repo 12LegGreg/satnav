@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SATNAV"
-run/main_scene="uid://dl4ire4nnd12j"
+run/main_scene="uid://dbc3tihtwvbl4"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
 [autoload]

@@ -1,0 +1,18 @@
+[gd_resource type="Environment" format=3 uid="uid://bvoehweofyx1g"]
+
+[ext_resource type="Shader" uid="uid://cvfk6h47wgiuj" path="res://resources/themes/stars.gdshader" id="1_l17s8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h4p0k"]
+shader = ExtResource("1_l17s8")
+shader_parameter/sun_color = Color(10, 10, 10, 1)
+shader_parameter/sun_size = 0.05
+shader_parameter/sun_blur = 0.01
+shader_parameter/star_density = 0.5
+shader_parameter/star_brightness = 1.2
+
+[sub_resource type="Sky" id="Sky_5bkp5"]
+sky_material = SubResource("ShaderMaterial_h4p0k")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_5bkp5")
