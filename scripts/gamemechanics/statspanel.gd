@@ -1,5 +1,6 @@
 extends PanelContainer
 
+@export var main: Node
 @export var satellite_network_manager: Node
 @export var station_network_manager: Node
 @export var refresh_interval: float = 0.25
@@ -62,7 +63,7 @@ func create_entity_row(entity) -> Dictionary:
 	refuel_button.text = "Refuel"
 	vbox.add_child(refuel_button)
 	refuel_button.pressed.connect(_on_refuel_pressed.bind(entity))
-
+	
 	return {
 		"panel": panel,
 		"title": title_label,
@@ -70,7 +71,13 @@ func create_entity_row(entity) -> Dictionary:
 		"fuel_bar": fuel_bar,
 		"stats_label": stats_label,
 	}
+	
+func _on_refuel_pressed(body) -> void:
+	if not is_instance_valid(body):
+		return
+	main.refuel_single(body)
 
+	
 func update_row_text() -> void:
 	for entity in row_nodes.keys():
 		if not is_instance_valid(entity):
@@ -92,10 +99,10 @@ func build_stat_line(type_data: Resource) -> String:
 	var parts: Array = []
 	var money = type_data.get("money_per_orbit")
 	if money != null:
-		parts.append("$%1f/orbit" % money)
+		parts.append("$%.1f/orbit" % money)
 	var science = type_data.get("science_per_orbit")
 	if science != null:
-		parts.append("+%1f sci/orbit" % science)
+		parts.append("+%.1f sci/orbit" % science)
 	var speed = type_data.get("orbit_speed")
 	if speed != null:
 		parts.append("Speed %.1f" % speed)

@@ -61,5 +61,9 @@ func announce_destroyed():
 func get_missing_fuel() -> float:
 	return type_data.max_fuel - current_fuel
 
+func get_refuel_cost() -> float:
+	return get_missing_fuel() * type_data.fuel_price_per_unit
+	
+
 func refuel_full():
 	current_fuel = type_data.max_fuel

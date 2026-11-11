@@ -97,8 +97,7 @@ func get_refuel_all_cost() -> float:
 	for manager in managers:
 		for network in manager.get_children():
 			for body in network.members:
-				var body_cost: float = body.get_missing_fuel()*body.type_data.fuel_price_per_unit
-				total_cost += body_cost
+				total_cost += body.get_refuel_cost()
 	return ceili(total_cost)
 
 func refuel_all():
@@ -114,14 +113,14 @@ func refuel_all():
 			for body in network.members:
 				body.refuel_full()
 
-func refuel_single():
-	var cost: float = get_refuel_single_cost()
+func refuel_single(body):
+	var cost: float = body.get_refuel_cost()
 	if cost == 0:
 		return
 	if not Economy.try_spend(cost):
 		print("Not enough money")
 		return
-	
+	body.refuel_full()
 	
 #NETWORK UNLOCKING
 func buy_network_unlock(manager):

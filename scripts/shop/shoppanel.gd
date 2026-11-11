@@ -15,7 +15,7 @@ func open_shop() -> void:
 func refresh_buttons():
 	var fuel_cost = main.get_refuel_all_cost()
 	var sat_network_cost = main.satellite_network_manager.get_network_unlock_cost()
-	var stn_network_cost = main.satellite_network_manager.get_network_unlock_cost()
+	var stn_network_cost = main.station_network_manager.get_network_unlock_cost()
 	refuel_all_button.text = "Refuel All - $%.1f" % main.get_refuel_all_cost()
 	refuel_all_button.disabled = not Economy.can_afford(fuel_cost)
 	sat_network_button.text = "Unlock New Satellite Network - $%.1f" % main.satellite_network_manager.get_network_unlock_cost()
