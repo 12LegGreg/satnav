@@ -8,3 +8,4 @@ class_name OrbitalTypeData
 @export var decay_rate: float = 0.025
 @export var max_hp: float = 100.0
 @export var purchase_cost: int = 10
+@export var fuel_price_per_unit: int = 1

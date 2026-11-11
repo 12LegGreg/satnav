@@ -16,3 +16,7 @@ func close_shop() -> void:
 
 func _on_close_button_pressed() -> void:
 	close_shop()
+
+func _on_refuel_all_button_pressed() -> void:
+	main.refuel_all()
+	

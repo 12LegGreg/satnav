@@ -28,11 +28,14 @@ handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MenuBackground/SubViewport" unique_id=2061107399]
+environment = ExtResource("1_5mbse")
+
 [node name="Camera3D" type="Camera3D" parent="MenuBackground/SubViewport" unique_id=1341617551]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0, 12)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="MenuBackground/SubViewport" unique_id=2061107399]
-environment = ExtResource("1_5mbse")
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MenuBackground/SubViewport" unique_id=1526309533]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24.749397)
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1279620114]
 layout_mode = 1
@@ -47,8 +50,10 @@ layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1597853068]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "SATNAV"
 horizontal_alignment = 1
+uppercase = true
 
 [node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1287306147]
 layout_mode = 2

@@ -55,6 +55,11 @@ func leave_network():
 	if assigned_network:
 		assigned_network.remove_member(self)
 		
-	
 func announce_destroyed():
 	pass
+
+func get_missing_fuel() -> float:
+	return type_data.max_fuel - current_fuel
+
+func refuel_full():
+	current_fuel = type_data.max_fuel

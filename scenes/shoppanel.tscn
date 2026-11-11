@@ -37,31 +37,39 @@ layout_mode = 2
 [node name="HeaderRow" type="HBoxContainer" parent="ShopWindow/MarginContainer/VBoxContainer" unique_id=1945217730]
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="ShopWindow/MarginContainer/VBoxContainer/HeaderRow" unique_id=2020757301]
-layout_mode = 2
-text = "Shop
-"
-
 [node name="CloseButton" type="Button" parent="ShopWindow/MarginContainer/VBoxContainer/HeaderRow" unique_id=1868508896]
 layout_mode = 2
 text = "Close"
 
 [node name="CategoryTabs" type="TabContainer" parent="ShopWindow/MarginContainer/VBoxContainer" unique_id=1911407892]
 layout_mode = 2
-current_tab = 0
+size_flags_vertical = 3
+current_tab = 3
 
-[node name="pSatTab" type="Label" parent="ShopWindow/MarginContainer/VBoxContainer/CategoryTabs" unique_id=303478150]
+[node name="Satellites" type="Label" parent="ShopWindow/MarginContainer/VBoxContainer/CategoryTabs" unique_id=303478150]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="pStnTab" type="Label" parent="ShopWindow/MarginContainer/VBoxContainer/CategoryTabs" unique_id=1436011541]
+[node name="Stations" type="Label" parent="ShopWindow/MarginContainer/VBoxContainer/CategoryTabs" unique_id=1436011541]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="pUpgTab" type="Label" parent="ShopWindow/MarginContainer/VBoxContainer/CategoryTabs" unique_id=2015624647]
+[node name="Upgrades" type="Label" parent="ShopWindow/MarginContainer/VBoxContainer/CategoryTabs" unique_id=2015624647]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
+[node name="Refuel & Repairs" type="Label" parent="ShopWindow/MarginContainer/VBoxContainer/CategoryTabs" unique_id=1275742284]
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="RefuelAllButton" type="Button" parent="ShopWindow/MarginContainer/VBoxContainer/CategoryTabs/Refuel & Repairs" unique_id=642119046]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Refuel All"
+
 [connection signal="pressed" from="ShopWindow/MarginContainer/VBoxContainer/HeaderRow/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="ShopWindow/MarginContainer/VBoxContainer/CategoryTabs/Refuel & Repairs/RefuelAllButton" to="." method="_on_refuel_all_button_pressed"]

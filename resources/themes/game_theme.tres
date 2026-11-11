@@ -3,6 +3,20 @@
 [ext_resource type="FontFile" uid="uid://cyw6hg6bv3125" path="res://artwork/fonts/Share_Tech_Mono/ShareTechMono-Regular.ttf" id="1_5t46v"]
 [ext_resource type="StyleBox" uid="uid://2b75pqp1mgo6" path="res://resources/themes/panel_style.tres" id="1_d5i2s"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5i2s"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.87846637, 0.36440143, 0.34950915, 0.15686275)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 1
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnxf4"]
 bg_color = Color(0.48235294, 0.5254902, 0.8235294, 0.7176471)
 border_width_left = 4
@@ -115,6 +129,7 @@ corner_detail = 1
 [resource]
 default_font = ExtResource("1_5t46v")
 default_font_size = 16
+Button/styles/disabled = SubResource("StyleBoxFlat_d5i2s")
 Button/styles/hover = SubResource("StyleBoxFlat_tnxf4")
 Button/styles/normal = SubResource("StyleBoxFlat_aifkq")
 Button/styles/pressed = SubResource("StyleBoxFlat_5t46v")

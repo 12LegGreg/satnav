@@ -22,7 +22,7 @@ func _process(_delta: float) -> void:
 	update_coverage()
 	if Input.is_action_just_pressed("buy_station"):
 		try_buy_station()
-		
+
 func update_coverage():
 	var filled_seats = 0
 	var total_seats = 0
@@ -31,43 +31,41 @@ func update_coverage():
 		filled_seats += network.members.size()
 	if total_seats > 0:
 		win_bar.value = (float(filled_seats) / float(total_seats)) * 100.0
-		
+
 func try_buy_satellite(chosen_type: SatelliteTypeData = null):
 	var type_to_buy = chosen_type if chosen_type else default_satellite_type
-	if Economy.money < type_to_buy.purchase_cost:
-		print("Not enough money")
-		return
 	var target_network = find_available_satellite_network()
 	if target_network == null:
-		print ("No unlocked network has a free seat")
+		print("No unlocked network has a free seat")
 		return
-	Economy.add_money(-type_to_buy.purchase_cost)
+	if not Economy.try_spend(type_to_buy.purchase_cost):
+		print("Not enough money")
+		return
 	var new_satellite = satellite_scene.instantiate()
 	new_satellite.type_data = type_to_buy
 	target_network.add_member(new_satellite)
 	world.add_child(new_satellite)
-	
+
 func try_buy_station(chosen_type: StationTypeData = null):
 	var type_to_buy = chosen_type if chosen_type else default_station_type
-	if Economy.money < type_to_buy.purchase_cost:
-		print("Not enough money")
-		return
 	var target_network = find_available_station_network()
 	if target_network == null:
 		print ("No unlocked network has a free seat")
 		return
-	Economy.add_money(-type_to_buy.purchase_cost)
+	if not Economy.try_spend(type_to_buy.purchase_cost):
+		print("Not enough money")
+		return
 	var new_station = station_scene.instantiate()
 	new_station.type_data = type_to_buy
 	target_network.add_member(new_station)
 	world.add_child(new_station)
-	
+
 func find_available_satellite_network():
 	for network in satellite_network_manager.get_children():
 		if network.unlocked and network.members.size() < network.capacity:
 			return network
 	return null
-	
+
 func find_available_station_network():
 	for network in station_network_manager.get_children():
 		if network.unlocked and network.members.size() < network.capacity:
@@ -85,3 +83,27 @@ func trigger_game_over(reason: String):
 		game_over = true
 		print("Game Over: ", reason)
 		get_tree().paused = true
+
+func get_refuel_all_cost() -> int:
+	var total_cost: float = 0.0
+	var managers: Array = [satellite_network_manager, station_network_manager]
+	for manager in managers:
+		for network in manager.get_children():
+			for body in network.members:
+				var body_cost: float = body.get_missing_fuel()*body.type_data.fuel_price_per_unit
+				total_cost += body_cost
+	return ceili(total_cost)
+
+func refuel_all():
+	var cost: int = get_refuel_all_cost()
+	if cost == 0:
+		return
+	if not Economy.try_spend(cost):
+		print("Not enough money")
+		return
+	var managers: Array = [satellite_network_manager, station_network_manager]
+	for manager in managers:
+		for network in manager.get_children():
+			for body in network.members:
+				body.refuel_full()
+	
