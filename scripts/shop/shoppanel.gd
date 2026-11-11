@@ -20,3 +20,10 @@ func _on_close_button_pressed() -> void:
 func _on_refuel_all_button_pressed() -> void:
 	main.refuel_all()
 	
+
+
+func _on_unlock_sat_network_pressed() -> void:
+	main.buy_network_unlock(main.satellite_network_manager)
+
+func _on_unlock_stn_network_pressed() -> void:
+	main.buy_network_unlock(main.station_network_manager)

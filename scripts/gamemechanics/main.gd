@@ -1,5 +1,6 @@
 extends Node
 
+#variables
 @export var satellite_scene: PackedScene
 @export var station_scene: PackedScene
 @export var default_satellite_type : SatelliteTypeData
@@ -13,7 +14,7 @@ var game_over: bool = false
 
 func _ready():
 	Gameevents.satellite_destroyed.connect(check_loss_conditions)
-
+	
 func _process(_delta: float) -> void:
 	if game_over:
 		return
@@ -23,6 +24,8 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("buy_station"):
 		try_buy_station()
 
+#GAME WIN AND LOSS CONDITIONS:
+
 func update_coverage():
 	var filled_seats = 0
 	var total_seats = 0
@@ -31,6 +34,20 @@ func update_coverage():
 		filled_seats += network.members.size()
 	if total_seats > 0:
 		win_bar.value = (float(filled_seats) / float(total_seats)) * 100.0
+
+func check_loss_conditions():
+	var total_satellites = 0
+	for network in satellite_network_manager.get_children():
+		total_satellites += network.members.size()
+	if total_satellites == 0 and Economy.money < default_satellite_type.purchase_cost:	
+		trigger_game_over("Bankrupt with no more satellites")
+
+func trigger_game_over(reason: String):	
+		game_over = true
+		print("Game Over: ", reason)
+		get_tree().paused = true
+
+#SATELLITE PURCHASING
 
 func try_buy_satellite(chosen_type: SatelliteTypeData = null):
 	var type_to_buy = chosen_type if chosen_type else default_satellite_type
@@ -72,17 +89,7 @@ func find_available_station_network():
 			return network
 	return null
 
-func check_loss_conditions():
-	var total_satellites = 0
-	for network in satellite_network_manager.get_children():
-		total_satellites += network.members.size()
-	if total_satellites == 0 and Economy.money < default_satellite_type.purchase_cost:	
-		trigger_game_over("Bankrupt with no more satellites")
-
-func trigger_game_over(reason: String):	
-		game_over = true
-		print("Game Over: ", reason)
-		get_tree().paused = true
+#REFUELLING
 
 func get_refuel_all_cost() -> int:
 	var total_cost: float = 0.0
@@ -107,3 +114,10 @@ func refuel_all():
 			for body in network.members:
 				body.refuel_full()
 	
+#NETWORK UNLOCKING
+func buy_network_unlock(manager):
+	if not manager.has_locked_networks():
+		return
+	if not Science.try_spend(manager.get_network_unlock_cost()):
+		print("Not enough science")
+	manager.unlock_random_network()

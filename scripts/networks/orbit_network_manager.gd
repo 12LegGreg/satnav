@@ -7,6 +7,9 @@ extends Node
 @export var inclination_density: int
 @export var planet: Node3D
 @export var altitude_fraction: float
+@export var network_unlock_base_cost: float
+@export var network_unlock_cost_increase: float
+@export var networks_unlocked: int = 0
 
 func _ready() -> void:
 	var axes: Array = []
@@ -41,3 +44,26 @@ func spawn_network(axis: Vector3, is_unlocked: bool) -> void:
 	new_network.planet_radius = planet.planet_radius
 	new_network.unlocked = is_unlocked
 	add_child(new_network)
+	
+func get_network_unlock_cost() -> int:
+	return network_unlock_base_cost + network_unlock_cost_increase * networks_unlocked
+
+func get_locked_networks() -> Array:
+	var locked: Array = []
+	for network in get_children():
+		if not network.unlocked:
+			locked.append(network)
+	return locked
+
+func has_locked_networks() -> bool:
+	return not get_locked_networks().is_empty()
+
+func unlock_random_network() -> bool:
+	var locked: Array = get_locked_networks()
+	if locked.is_empty():
+		return false
+	var chosen_network = locked.pick_random()
+	chosen_network.unlocked = true
+	networks_unlocked += 1
+	return true
+	

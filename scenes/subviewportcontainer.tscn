@@ -58,7 +58,9 @@ second_meridian_count = 8
 inclination_steps = 3
 inclination_density = 6
 planet = NodePath("../Planet")
-altitude_fraction = 2.0
+altitude_fraction = 1.5
+network_unlock_base_cost = 100.0
+network_unlock_cost_increase = 50.0
 
 [node name="StationNetworkManager" type="Node" parent="SubViewport" unique_id=369845698 node_paths=PackedStringArray("planet")]
 script = ExtResource("7_oqesm")
@@ -67,7 +69,9 @@ meridian_count = 3
 inclination_steps = 1
 inclination_density = 6
 planet = NodePath("../Planet")
-altitude_fraction = 3.0
+altitude_fraction = 2.5
+network_unlock_base_cost = 150.0
+network_unlock_cost_increase = 75.0
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=858571204 node_paths=PackedStringArray("shop_panel")]
 layer = 10

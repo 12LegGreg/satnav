@@ -6,9 +6,14 @@ class_name OrbitNetwork
 @export var orbit_axis: Vector3 = Vector3(0,1,0.3)
 @export var orbit_radius: float
 @export var capacity: int = 5
-@export var unlocked: bool = true
 @export var locked_color: Color = Color(0.4,0.4,0.4)
 @export var unlocked_color: Color = Color.WHITE
+@export var unlocked: bool = true:
+	set(value):
+		unlocked = value
+		if is_node_ready():
+			update_visual_state()
+
 
 var planet_radius: float
 
