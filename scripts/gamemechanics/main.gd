@@ -91,7 +91,7 @@ func find_available_station_network():
 
 #REFUELLING
 
-func get_refuel_all_cost() -> int:
+func get_refuel_all_cost() -> float:
 	var total_cost: float = 0.0
 	var managers: Array = [satellite_network_manager, station_network_manager]
 	for manager in managers:
@@ -102,7 +102,7 @@ func get_refuel_all_cost() -> int:
 	return ceili(total_cost)
 
 func refuel_all():
-	var cost: int = get_refuel_all_cost()
+	var cost: float = get_refuel_all_cost()
 	if cost == 0:
 		return
 	if not Economy.try_spend(cost):
@@ -113,6 +113,15 @@ func refuel_all():
 		for network in manager.get_children():
 			for body in network.members:
 				body.refuel_full()
+
+func refuel_single():
+	var cost: float = get_refuel_single_cost()
+	if cost == 0:
+		return
+	if not Economy.try_spend(cost):
+		print("Not enough money")
+		return
+	
 	
 #NETWORK UNLOCKING
 func buy_network_unlock(manager):
@@ -120,4 +129,5 @@ func buy_network_unlock(manager):
 		return
 	if not Science.try_spend(manager.get_network_unlock_cost()):
 		print("Not enough science")
+		return
 	manager.unlock_random_network()

@@ -111,6 +111,7 @@ theme = ExtResource("15_tnxf4")
 script = ExtResource("15_fwkcl")
 satellite_network_manager = NodePath("../../SubViewport/SatelliteNetworkManager")
 station_network_manager = NodePath("../../SubViewport/StationNetworkManager")
+refresh_interval = null
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/StatsPanel" unique_id=1213948634]
 layout_mode = 2

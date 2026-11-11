@@ -9,7 +9,7 @@ extends Node
 @export var altitude_fraction: float
 @export var network_unlock_base_cost: float
 @export var network_unlock_cost_increase: float
-@export var networks_unlocked: int = 0
+var networks_unlocked: int = 0
 
 func _ready() -> void:
 	var axes: Array = []
@@ -45,7 +45,7 @@ func spawn_network(axis: Vector3, is_unlocked: bool) -> void:
 	new_network.unlocked = is_unlocked
 	add_child(new_network)
 	
-func get_network_unlock_cost() -> int:
+func get_network_unlock_cost() -> float:
 	return network_unlock_base_cost + network_unlock_cost_increase * networks_unlocked
 
 func get_locked_networks() -> Array:

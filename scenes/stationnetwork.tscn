@@ -4,5 +4,5 @@
 
 [node name="StationNetwork" type="MeshInstance3D" unique_id=375977397]
 script = ExtResource("1_6hkwb")
-locked_color = Color(0.52826095, 1.0880516, 1.5137255, 1)
+locked_color = Color(1.1229343e-06, 0.46834135, 0.73227906, 1)
 unlocked_color = Color(0.7411765, 0.9882353, 0.9882353, 1)

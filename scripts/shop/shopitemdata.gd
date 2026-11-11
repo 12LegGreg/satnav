@@ -8,7 +8,7 @@ enum Category { SATELLITE_UNLOCK, STATION_UNLOCK, RUN_WIDE_UPGRADE, INSTANCE_UPG
 @export var item_id: String = ""
 @export var item_name: String = ""
 @export_multiline var description: String = ""
-@export var cost: int = 0
+@export var cost: float = 0
 @export var currency: Currency = Currency.MONEY
 @export var category: Category = Category.SATELLITE_UNLOCK
 

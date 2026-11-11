@@ -32,9 +32,9 @@ func sync_rows() -> void:
 			row_nodes.erase(entity)
 	for entity in current_entities:
 		if not row_nodes.has(entity):
-			row_nodes[entity] = create_entity_row()
+			row_nodes[entity] = create_entity_row(entity)
 
-func create_entity_row() -> Dictionary:
+func create_entity_row(entity) -> Dictionary:
 	var panel = PanelContainer.new()
 	list_container.add_child(panel)
 
@@ -57,6 +57,11 @@ func create_entity_row() -> Dictionary:
 	stats_label.add_theme_font_size_override("font_size", 11)
 	stats_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(stats_label)
+	
+	var refuel_button = Button.new()
+	refuel_button.text = "Refuel"
+	vbox.add_child(refuel_button)
+	refuel_button.pressed.connect(_on_refuel_pressed.bind(entity))
 
 	return {
 		"panel": panel,
@@ -87,10 +92,10 @@ func build_stat_line(type_data: Resource) -> String:
 	var parts: Array = []
 	var money = type_data.get("money_per_orbit")
 	if money != null:
-		parts.append("$%d/orbit" % money)
+		parts.append("$%1f/orbit" % money)
 	var science = type_data.get("science_per_orbit")
 	if science != null:
-		parts.append("+%d sci/orbit" % science)
+		parts.append("+%1f sci/orbit" % science)
 	var speed = type_data.get("orbit_speed")
 	if speed != null:
 		parts.append("Speed %.1f" % speed)
