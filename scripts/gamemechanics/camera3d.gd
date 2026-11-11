@@ -25,7 +25,7 @@ func _input(event):
 			camera_distance -= zoom_speed
 		camera_distance = clamp(camera_distance, planet.planet_radius * 1, planet.planet_radius * 8)
 
-func _process(delta: float)-> void:
+func _process(_delta: float)-> void:
 	position = Vector3(
 		camera_distance * cos(pitch) * sin(yaw),
 		camera_distance * sin(pitch),

@@ -12,10 +12,10 @@
 [ext_resource type="Script" uid="uid://c3al4d32n2xp3" path="res://scripts/gamemechanics/uiscript.gd" id="6_sueu4"]
 [ext_resource type="Script" uid="uid://1pjjyu4rhdmf" path="res://scripts/networks/orbit_network_manager.gd" id="7_oqesm"]
 [ext_resource type="PackedScene" uid="uid://byw2o1v2gvakk" path="res://scenes/satellitenetwork.tscn" id="7_w23tb"]
-[ext_resource type="Theme" uid="uid://c4tcrymt5j0ds" path="res://resources/themes/ui_theme.tres" id="8_sueu4"]
 [ext_resource type="PackedScene" uid="uid://cdd6avsdc3pyc" path="res://scenes/stationnetwork.tscn" id="9_n26cp"]
 [ext_resource type="Script" uid="uid://dfq307sdbe0u6" path="res://scripts/gamemechanics/scienceupdater.gd" id="13_oqesm"]
 [ext_resource type="Script" uid="uid://c4jr1vheboypm" path="res://scripts/gamemechanics/statspanel.gd" id="15_fwkcl"]
+[ext_resource type="Theme" uid="uid://b8kpqoqbavk1" path="res://resources/themes/game_theme.tres" id="15_tnxf4"]
 [ext_resource type="PackedScene" uid="uid://cxchbdxk70q8o" path="res://scenes/shoppanel.tscn" id="16_cca8a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h4p0k"]
@@ -90,14 +90,12 @@ shop_panel = NodePath("ShopPanel")
 
 [node name="ResourcesPanel" type="PanelContainer" parent="UI" unique_id=105024894]
 anchors_preset = -1
-anchor_right = 0.21100001
-anchor_bottom = 0.063
+anchor_right = 0.22
+anchor_bottom = 0.1
 offset_left = 12.0
 offset_top = 12.0
-offset_right = -0.072006226
-offset_bottom = 0.17599869
-theme = ExtResource("8_sueu4")
-theme_type_variation = &"SmallPanel"
+offset_right = -12.0
+offset_bottom = -12.0
 
 [node name="ResourcesContainer" type="HBoxContainer" parent="UI/ResourcesPanel" unique_id=652255396]
 layout_mode = 2
@@ -112,13 +110,14 @@ script = ExtResource("13_oqesm")
 
 [node name="StatsPanel" type="PanelContainer" parent="UI" unique_id=930517216 node_paths=PackedStringArray("satellite_network_manager", "station_network_manager")]
 anchors_preset = -1
-anchor_top = 0.06
+anchor_top = 0.08
 anchor_right = 0.22
 anchor_bottom = 1.0
 offset_left = 12.0
 offset_top = 12.0
 offset_right = -12.0
 offset_bottom = -12.0
+theme = ExtResource("15_tnxf4")
 script = ExtResource("15_fwkcl")
 satellite_network_manager = NodePath("../../SubViewport/SatelliteNetworkManager")
 station_network_manager = NodePath("../../SubViewport/StationNetworkManager")
@@ -128,7 +127,6 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/StatsPanel/ScrollContainer" unique_id=1415766563]
 layout_mode = 2
-theme = ExtResource("8_sueu4")
 
 [node name="WinConditionBar" type="ProgressBar" parent="UI" unique_id=30880947]
 anchors_preset = -1
@@ -141,17 +139,16 @@ value = 15.0
 [node name="UpgradesPanel" type="PanelContainer" parent="UI" unique_id=132265211]
 anchors_preset = -1
 anchor_left = 0.78
-anchor_top = 0.06
+anchor_top = 0.08
 anchor_right = 0.96
 anchor_bottom = 1.0
 offset_left = 12.0
-offset_top = 12.0
+offset_top = 12.16
 offset_right = -12.0
 offset_bottom = -12.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/UpgradesPanel" unique_id=1576994950]
 layout_mode = 2
-theme = ExtResource("8_sueu4")
 
 [node name="UpgradesPlaceholder" type="Label" parent="UI/UpgradesPanel/VBoxContainer" unique_id=635223549]
 layout_mode = 2
@@ -160,12 +157,12 @@ text = "Upgrades List"
 [node name="ShopToggleButton" type="Button" parent="UI" unique_id=430323560]
 anchors_preset = -1
 anchor_left = 0.95
-anchor_top = 0.06
+anchor_top = 0.08
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 12.0
-offset_top = 12.120003
-offset_right = -12.0
+offset_top = 12.0
+offset_right = -11.0
 offset_bottom = -11.880005
 
 [node name="ShopLabel" type="Label" parent="UI/ShopToggleButton" unique_id=947415400]
@@ -190,7 +187,7 @@ vertical_alignment = 1
 anchors_preset = -1
 anchor_left = 0.78
 anchor_right = 1.0
-anchor_bottom = 0.082
+anchor_bottom = 0.1
 offset_left = 12.440063
 offset_top = 12.0
 offset_right = -12.0
@@ -201,17 +198,6 @@ theme_type_variation = &"SmallPanel"
 layout_mode = 2
 size_flags_vertical = 4
 offset_transform_enabled = true
-
-[node name="PlaceholderDay" type="Label" parent="UI/DateTimePanel/DateTimeHbox" unique_id=1892026360]
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Day 1"
-
-[node name="PlaceholderTime" type="Label" parent="UI/DateTimePanel/DateTimeHbox" unique_id=2119754343]
-layout_mode = 2
-theme_override_font_sizes/font_size = 9
-text = "08:00
-"
 
 [node name="ShopPanel" parent="UI" unique_id=14554493 node_paths=PackedStringArray("main") instance=ExtResource("16_cca8a")]
 visible = false
